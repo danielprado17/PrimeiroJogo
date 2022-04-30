@@ -7,6 +7,8 @@ public class PlayerMove : MonoBehaviour
 
     public CharacterController characterController;
     public float speed = 2;
+    Vector3 move;
+    public GameObject cam;
    
     void Start()
     {
@@ -16,7 +18,11 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frames
     void Update()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 
+            0, 
+            Input.GetAxis("Vertical"));
+
+        move = cam.transform.TransformDirection(move);
         characterController.SimpleMove(move * speed);
     } 
     void FixedUpdate()
